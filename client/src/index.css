@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Bebas+Neue&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 220 10% 12%;  /* #1a1c22 - Dark background */
+  --foreground: 0 0% 98%;     /* #fafafa - Light text */
+  --muted: 220 10% 18%;       /* #272a32 - Slightly lighter than background */
+  --muted-foreground: 220 10% 80%; /* #c6c8cf - Muted text */
+  --popover: 220 10% 15%;     /* #1f222a - Popover background */
+  --popover-foreground: 0 0% 98%; /* #fafafa - Popover text */
+  --card: 220 10% 15%;        /* #1f222a - Card background */
+  --card-foreground: 0 0% 98%; /* #fafafa - Card text */
+  --border: 220 10% 22%;      /* #2d303a - Border color */
+  --input: 220 10% 22%;       /* #2d303a - Input background */
+  --primary: 16 100% 50%;     /* #FF5000 - Vibrant orange for fast food */
+  --primary-foreground: 0 0% 100%; /* #ffffff - Primary button text */
+  --secondary: 220 60% 10%;   /* #121a2e - Deep blue-gray */
+  --secondary-foreground: 0 0% 98%; /* #fafafa - Secondary text */
+  --accent: 35 100% 50%;      /* #FFA500 - Accent orange/yellow */
+  --accent-foreground: 220 60% 10%; /* #121a2e - Accent text */
+  --destructive: 0 84.2% 60.2%; /* #f44336 - Red for errors/destructive actions */
+  --destructive-foreground: 0 0% 98%; /* #fafafa - Destructive text */
+  --ring: 16 100% 50%;        /* #FF5000 - Ring color */
+  --radius: 0.5rem;
+
+  --success: 142 76% 36%;     /* #12b76a - Success green */
+  --warning: 35 100% 50%;     /* #ffa500 - Warning yellow/orange */
+  --error: 0 84.2% 60.2%;     /* #f44336 - Error red */
+  --light: 220 10% 22%;       /* #2d303a - Light background in dark mode */
+  --dark: 220 10% 12%;        /* #1a1c22 - Dark background */
+}
+
+/* We're using dark theme by default now */
+.light {
+  --background: 0 0% 100%;    /* #ffffff - Light background */
+  --foreground: 220 20% 10%;  /* #171b26 - Dark text on light background */
+  --muted: 220 20% 96%;       /* #f3f4f7 - Light muted background */
+  --muted-foreground: 220 10% 40%; /* #5f636d - Muted text */
+  --popover: 0 0% 100%;       /* #ffffff - Popover background */
+  --popover-foreground: 220 20% 10%; /* #171b26 - Popover text */
+  --card: 0 0% 100%;          /* #ffffff - Card background */
+  --card-foreground: 220 20% 10%; /* #171b26 - Card text */
+  --border: 220 13% 90%;      /* #e3e5eb - Border color */
+  --input: 220 13% 90%;       /* #e3e5eb - Input background */
+  --primary: 16 100% 50%;     /* #FF5000 - Same primary */
+  --primary-foreground: 0 0% 100%; /* #ffffff - Primary text */
+  --secondary: 220 60% 10%;   /* #121a2e - Secondary color */
+  --secondary-foreground: 0 0% 98%; /* #fafafa - Secondary text */
+  --accent: 35 100% 50%;      /* #FFA500 - Accent */
+  --accent-foreground: 220 60% 10%; /* #121a2e - Accent text */
+  --destructive: 0 84.2% 60.2%; /* #f44336 - Destructive */
+  --destructive-foreground: 0 0% 98%; /* #fafafa - Destructive text */
+  --ring: 16 100% 50%;        /* #FF5000 - Ring color */
+  
+  --success: 142 76% 36%;     /* #12b76a - Success */
+  --warning: 35 100% 50%;     /* #ffa500 - Warning */
+  --error: 0 84.2% 60.2%;     /* #f44336 - Error */
+  --light: 0 0% 100%;         /* #ffffff - Light */
+  --dark: 220 10% 12%;        /* #1a1c22 - Dark */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-body antialiased bg-background text-foreground;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+.font-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.font-body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.font-menu {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.03em;
+}
+
+.menu-item-transition {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.menu-item-transition:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px -5px rgba(255, 80, 0, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+.menu-item-transition::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px; 
+  background: linear-gradient(45deg, rgba(255, 80, 0, 0), rgba(255, 80, 0, 0.5), rgba(255, 80, 0, 0));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.menu-item-transition:hover::before {
+  opacity: 1;
+}
+
+/* Simple image hover effects for improved performance */
+.menu-image-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.menu-image-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.cart-badge-animation {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease;
+}
+
+.side-panel {
+  transition: transform 0.3s ease;
+}
+
+.category-pill.active {
+  @apply bg-primary text-white;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Animation for slide-in from bottom */
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-in.slide-in-from-bottom {
+  animation: slide-in-from-bottom 0.3s ease-out forwards;
+}
